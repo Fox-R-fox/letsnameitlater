@@ -7,8 +7,7 @@ spec:
     storage: 1Gi
   accessModes:
     - ReadWriteOnce
-  persistentVolumeReclaimPolicy: Retain
   storageClassName: gp2
   csi:
     driver: ebs.csi.aws.com
-    volumeHandle: <volume-handle>  # Replace with your EBS volume ID
+    volumeHandle: vol-0cdfecf1e25ae7d74
