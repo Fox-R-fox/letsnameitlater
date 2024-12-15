@@ -3,10 +3,9 @@ kind: Service
 metadata:
   name: backend
 spec:
-  type: LoadBalancer
   selector:
     app: backend
   ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 8080
+    - port: 80
+      targetPort: 3000
+  type: LoadBalancer  # Make sure this is a LoadBalancer if you want external access
