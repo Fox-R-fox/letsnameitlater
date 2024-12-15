@@ -20,6 +20,10 @@ spec:
         volumeMounts:
         - mountPath: /data/db
           name: mongo-storage
+      volumes:
+      - name: mongo-storage
+        persistentVolumeClaim:
+          claimName: mongo-storage
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
