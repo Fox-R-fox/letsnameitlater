@@ -45,8 +45,10 @@ pipeline {
                     sh '''
                         echo "$KUBECONFIG_BASE64" | base64 --decode > /tmp/kubeconfig
                         export KUBECONFIG=/tmp/kubeconfig
+                        kubectl apply -f k8s/mongo-pv.yaml
+                        kubectl apply -f k8s/mongo-pvc.yaml
                         kubectl apply -f k8s/frontend-deployment.yaml
-                        kubectl apply -f k8s/backend-dedployment.yaml
+                        kubectl apply -f k8s/backend-deployment.yaml
                         kubectl apply -f k8s/mongo-deployment.yaml
                         kubectl apply -f k8s/backend-service.yaml
                     '''
