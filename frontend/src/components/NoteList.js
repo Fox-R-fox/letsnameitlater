@@ -7,8 +7,13 @@ function NoteList() {
 
   useEffect(() => {
     const fetchNotes = async () => {
-      const response = await axios.get('/notes');
-      setNotes(response.data);
+      try {
+        // Update the URL to include the base URL of your backend service
+        const response = await axios.get('http://a3032c65405ba426cb88a976277a40e6-996365679.us-east-1.elb.amazonaws.com/notes');
+        setNotes(response.data);
+      } catch (error) {
+        console.error('Error fetching notes:', error);
+      }
     };
     fetchNotes();
   }, []);

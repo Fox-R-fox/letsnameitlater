@@ -7,8 +7,11 @@ WORKDIR /app
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install
+# Clear npm cache
+RUN npm cache clean --force
+
+# Install dependencies with integrity checks disabled and force update of the lockfile
+RUN npm install --legacy-peer-deps --no-package-lock
 
 # Copy the rest of the application
 COPY . .
