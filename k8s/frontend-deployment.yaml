@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: your-dockerhub-username/frontend
+        image: foxe03/frontend
         ports:
         - containerPort: 3000
 ---
