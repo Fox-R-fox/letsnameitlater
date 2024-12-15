@@ -1,26 +1,22 @@
-# Use an official node image as the base image
-FROM node:14
+# Stage 1: Build React app
+FROM node:14 as build
 
-# Set the working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
 COPY package*.json ./
-
-# Clear npm cache
-RUN npm cache clean --force
-
-# Install dependencies with integrity checks disabled and force update of the lockfile
 RUN npm install --legacy-peer-deps --no-package-lock
-
-# Copy the rest of the application
 COPY . .
 
-# Build the application
 RUN npm run build
 
-# Expose the application port
-EXPOSE 3000
+# Stage 2: Serve React app with Nginx
+FROM nginx:alpine
 
-# Start the application
-CMD ["npm", "start"]
+# Copy the build output to Nginx's public folder
+COPY --from=build /app/build /usr/share/nginx/html
+
+# Expose port 80 for Nginx
+EXPOSE 80
+
+# Run Nginx in the foreground
+CMD ["nginx", "-g", "daemon off;"]
