@@ -7,6 +7,9 @@ WORKDIR /app
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
+# Install npm version 6
+RUN npm install -g npm@6
+
 # Clear npm cache
 RUN npm cache clean --force
 
